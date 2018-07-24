@@ -1,0 +1,46 @@
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -29,7 +29,7 @@
+ 
+ add_subdirectory(python)
+ add_subdirectory(shells)
+-add_subdirectory(test)
++# add_subdirectory(test)
+ add_subdirectory(tools)
+ option(BUILD_DOC "Build documentation" OFF)
+ if(${BUILD_DOC})
+--- a/python/CMakeLists.txt
++++ b/python/CMakeLists.txt
+@@ -1,3 +1,23 @@
++macro (prepare_local_pytriqs python_destination)
++
++  get_filename_component(modulename ${python_destination} NAME)
++
++  # Install all other files
++  install(DIRECTORY ${CMAKE_SOURCE_DIR}/python/ DESTINATION ${TRIQS_PYTHON_LIB_DEST_ROOT}/${python_destination} FILES_MATCHING PATTERN *.py)
++
++  # Set a rule to have original python files copied to their destination if modified
++  file(GLOB_RECURSE python_sources RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.py)
++  EXECUTE_PROCESS(COMMAND mkdir -p ${CMAKE_CURRENT_BINARY_DIR}/${modulename})
++  set(py_copy_tar ${CMAKE_CURRENT_BINARY_DIR}/py_copy.tar)
++  add_custom_command(OUTPUT ${py_copy_tar}
++     COMMAND ${CMAKE_COMMAND} -E chdir ${CMAKE_CURRENT_SOURCE_DIR} tar cf ${py_copy_tar} ${python_sources}
++     COMMAND ${CMAKE_COMMAND} -E chdir ${CMAKE_CURRENT_BINARY_DIR}/${modulename} tar xf ${py_copy_tar}
++     COMMAND ${CMAKE_COMMAND} -E remove ${py_copy_tar}
++     DEPENDS ${python_sources})
++  add_custom_target(py_copy ALL DEPENDS ${py_copy_tar})
++
++endmacro(prepare_local_pytriqs)
++
+ # where will the python end up in triqs?
+ set(python_destination pytriqs/applications/dcore)
+ 
+@@ -6,7 +26,7 @@
+ configure_file(${CMAKE_SOURCE_DIR}/cmake/sitecustomize.py ${CMAKE_CURRENT_BINARY_DIR}/sitecustomize.py @ONLY)
+ 
+ # make a local pytriqs copy
+-triqs_prepare_local_pytriqs(${python_destination})
++prepare_local_pytriqs(${python_destination})
+ 
+ # add version file
+ configure_file(version.py.in version.py)
