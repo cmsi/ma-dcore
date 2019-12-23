@@ -1,3 +1,9 @@
+dcore (2.0.2-1) unstable; urgency=low
+
+  * New upstream 2.0.2
+
+ -- Synge Todo <wistaria@phys.s.u-tokyo.ac.jp>  Thu, 19 Dec 2019 18:04:11 +0900
+
 dcore (1.0.0-3) unstable; urgency=low
 
   * Move tools (openmx2dcore.py, respack2wan90) into /usr/share/dcore/tool.

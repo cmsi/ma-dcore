@@ -2,7 +2,7 @@
 
 ## How to prepare source files for dcore package
 
-        VERSION=1.0.0
+        VERSION=2.0.2
         cd $HOME/vagrant/data/src
         wget -O dcore-$VERSION.tar.gz https://github.com/issp-center-dev/DCore/archive/v$VERSION.tar.gz
         tar zxvf dcore-$VERSION.tar.gz

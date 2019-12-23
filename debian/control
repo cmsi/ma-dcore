@@ -2,7 +2,7 @@ Source: dcore
 Section: scientific
 Priority: extra
 Maintainer: Synge Todo <wistaria@phys.s.u-tokyo.ac.jp>
-Build-Depends: debhelper (>= 8.0.0), cmake, triqs
+Build-Depends: debhelper (>= 8.0.0), cmake, triqs, triqs-dfttools
 Standards-Version: 3.9.3
 Homepage: https://issp-center-dev.github.io/DCore
 
