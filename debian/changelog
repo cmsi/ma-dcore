@@ -1,3 +1,9 @@
+dcore (2.0.2-2) unstable; urgency=low
+
+  * Add examples directory
+
+ -- Synge Todo <wistaria@phys.s.u-tokyo.ac.jp>  Mon, 23 Dec 2019 18:31:12 +0900
+
 dcore (2.0.2-1) unstable; urgency=low
 
   * New upstream 2.0.2
